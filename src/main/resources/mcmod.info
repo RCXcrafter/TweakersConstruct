@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tweakersconstruct",
+  "name": "Tweakers Construct",
+  "description": "Miscelleaneous tweaks for tinkers' construct",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["RCXcrafter"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
