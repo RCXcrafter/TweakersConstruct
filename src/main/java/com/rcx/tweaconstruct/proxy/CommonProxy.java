@@ -3,6 +3,7 @@ package com.rcx.tweaconstruct.proxy;
 import com.rcx.tweaconstruct.ConfigHandler;
 import com.rcx.tweaconstruct.tweaks.PatternCosts;
 import com.rcx.tweaconstruct.tweaks.StatNerfs;
+import com.rcx.tweaconstruct.tweaks.StatTweaks;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -17,6 +18,7 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		StatNerfs.init();
+		StatTweaks.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

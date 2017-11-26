@@ -23,6 +23,8 @@ public class ConfigGui extends GuiConfig {
 
 		list.add(new ConfigElement(ConfigHandler.config.getCategory(ConfigHandler.misc.toLowerCase())));
 
+		list.add(new ConfigElement(ConfigHandler.config.getCategory(ConfigHandler.stats.toLowerCase())));
+
 		return list;
 	}
 }

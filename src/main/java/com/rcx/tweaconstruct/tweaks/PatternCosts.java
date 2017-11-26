@@ -10,6 +10,9 @@ import slimeknights.tconstruct.library.materials.Material;
 
 public class PatternCosts {
 	public static void preInit() {
+		if (ConfigHandler.toolpartCostList.length == 0)
+			return;
+
 		for (String entry : ConfigHandler.toolpartCostList) {
 			String[] entries = entry.split(":");
 			if (entries.length != 3)

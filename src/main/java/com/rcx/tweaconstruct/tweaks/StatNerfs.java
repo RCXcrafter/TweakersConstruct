@@ -2,16 +2,10 @@ package com.rcx.tweaconstruct.tweaks;
 
 import com.rcx.tweaconstruct.ConfigHandler;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.events.MaterialEvent;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
-import slimeknights.tconstruct.library.materials.IMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.materials.MaterialTypes;
 
@@ -49,25 +43,10 @@ public class StatNerfs {
 				}
 			}
 
-			tweakMaterialStats(material, new HeadMaterialStats(headDurability, miningSpeed, headStats.attack, headStats.harvestLevel));
-			tweakMaterialStats(material, new HandleMaterialStats(handleStats.modifier, handleDurability));
-			tweakMaterialStats(material, new ExtraMaterialStats(extraDurability));
-			//tweakMaterialStats(material, new BowMaterialStats(bowStats.drawspeed, bowStats.range, bowStats.bonusDamage));
-		}	
-	}
-
-	public static void tweakMaterialStats(Material material, IMaterialStats stats) {
-		MaterialEvent.StatRegisterEvent<?> event = new MaterialEvent.StatRegisterEvent<IMaterialStats>(material, stats);
-		MinecraftForge.EVENT_BUS.post(event);
-
-		// overridden stats from event
-		if(event.getResult() == Event.Result.ALLOW) {
-			stats = event.newStats;
+			StatTweaks.tweakMaterialStats(material, new HeadMaterialStats(headDurability, miningSpeed, headStats.attack, headStats.harvestLevel));
+			StatTweaks.tweakMaterialStats(material, new HandleMaterialStats(handleStats.modifier, handleDurability));
+			StatTweaks.tweakMaterialStats(material, new ExtraMaterialStats(extraDurability));
+			//StatTweaks.tweakMaterialStats(material, new BowMaterialStats(bowStats.drawspeed, bowStats.range, bowStats.bonusDamage));
 		}
-
-		material.addStats(stats);
-
-		ModContainer activeMod = Loader.instance().activeModContainer();
-		//TinkerRegistry.putStatTrace(material.identifier, stats, activeMod);
 	}
 }

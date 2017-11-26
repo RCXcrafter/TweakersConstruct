@@ -23,27 +23,6 @@ public class TweakersConstruct {
 	public static final String MODID = "tweakersconstruct";
 	public static final String VERSION = "1.0.0";
 
-	/*public static final CreativeTabs creativeTabs = new CreativeTabs(MODID) {
-		@SideOnly(Side.CLIENT)
-		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(CompressedBlockRegistry.compressedBlocks.get(0).compressedBlock);
-		}
-
-		@SideOnly(Side.CLIENT)
-		@Override
-		public int getIconItemDamage() {
-			int firstMeta = 0;
-			for (int i = 0; i < CompressedBlockRegistry.compressedBlocks.get(0).maxCompression; i++) {
-				if (!CompressedBlockRegistry.compressedBlocks.get(0).existingLevels.contains(i + 1)) {
-					firstMeta = i;
-					break;
-				}
-			}
-			return firstMeta;
-		}
-	};*/
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent preEvent) {
 		proxy.preInit(preEvent);
