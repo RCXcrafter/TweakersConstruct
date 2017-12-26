@@ -20,7 +20,7 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.materials.MaterialTypes;
 
 public class StatTweaks {
-	public static void init() {
+	public static void postInit() {
 		if (ConfigHandler.statTweaksList.length == 0)
 			return;
 

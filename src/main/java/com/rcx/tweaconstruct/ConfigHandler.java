@@ -20,6 +20,7 @@ public class ConfigHandler {
 	public static Integer durabilityNerf = 75;
 	public static Integer mineSpeedNerf = 75;
 	public static Boolean hardcoreNerfs = true;
+	public static Boolean toolVincibility = true;
 	public static String[] toolpartCostList;
 	private static String[] toolpartCostListDefaults = {
 			"tconstruct:pick_head:3",
@@ -29,6 +30,10 @@ public class ConfigHandler {
 	public static String[] statTweaksList;
 	private static String[] statTweaksListDefaults = {
 			"stone:90:3.0:3:1:0.5:-87:15:5.0:0.4:-1.0"
+	};
+	public static String[] RemoveMaterialList;
+	private static String[] RemoveMaterialListDefaults = {
+			"paper"
 	};
 
 	public static void preInit(File file) {
@@ -58,6 +63,10 @@ public class ConfigHandler {
 						+ "\nModID: The mod id of the toolpart."
 						+ "\nItemID: The id of the toolpart."
 						+ "\nMaterialCost: The amount of ingots the toolpart should cost.");
+
+		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list");
+
+		toolVincibility = config.getBoolean("Tool Uninvincibility", misc, toolVincibility, "Turning this option on will stop tinkers tools from being invincible (they can despawn and burn in lava)");
 
 		if(config.hasChanged())
 			config.save();

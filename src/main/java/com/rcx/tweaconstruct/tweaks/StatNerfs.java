@@ -10,7 +10,7 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.materials.MaterialTypes;
 
 public class StatNerfs {
-	public static void init() {
+	public static void postInit() {
 		if (ConfigHandler.durabilityNerf == 100 && ConfigHandler.mineSpeedNerf == 100)
 			return;
 

@@ -14,14 +14,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "after:tconstruct")
+@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:tconstruct")
 
 public class TweakersConstruct {
 
 	@SidedProxy(clientSide = "com.rcx.tweaconstruct.proxy.ClientProxy", serverSide = "com.rcx.tweaconstruct.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	public static final String MODID = "tweakersconstruct";
-	public static final String VERSION = "1.0.0";
+	public static final String VERSION = "1.10.2-1.1.0";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent preEvent) {

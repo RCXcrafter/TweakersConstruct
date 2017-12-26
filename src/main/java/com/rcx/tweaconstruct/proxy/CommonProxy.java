@@ -1,9 +1,7 @@
 package com.rcx.tweaconstruct.proxy;
 
 import com.rcx.tweaconstruct.ConfigHandler;
-import com.rcx.tweaconstruct.tweaks.PatternCosts;
-import com.rcx.tweaconstruct.tweaks.StatNerfs;
-import com.rcx.tweaconstruct.tweaks.StatTweaks;
+import com.rcx.tweaconstruct.tweaks.*;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -14,14 +12,16 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.preInit(event.getSuggestedConfigurationFile());
 		PatternCosts.preInit();
+		ToolVincibility.preInit();
+		RemoveMaterials.preInit();
 	}
 
 	public void init(FMLInitializationEvent event) {
-		StatNerfs.init();
-		StatTweaks.init();
+		
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		
+		StatNerfs.postInit();
+		StatTweaks.postInit();
 	}
 }
