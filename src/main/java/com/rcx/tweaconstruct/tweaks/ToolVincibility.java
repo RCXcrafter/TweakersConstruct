@@ -46,7 +46,7 @@ public class ToolVincibility {
 
 			worldObj.spawnEntityInWorld((EntityItem) newDrop);
 			newDrop.setEntityItemStack(drop.getEntityItem());
-			System.out.println(newDrop);
+			//System.out.println(newDrop);
 
 			event.setCanceled(true);
 		}

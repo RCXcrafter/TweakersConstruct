@@ -11,13 +11,12 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.preInit(event.getSuggestedConfigurationFile());
-		PatternCosts.preInit();
 		ToolVincibility.preInit();
 		RemoveMaterials.preInit();
 	}
 
 	public void init(FMLInitializationEvent event) {
-		
+		PatternCosts.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

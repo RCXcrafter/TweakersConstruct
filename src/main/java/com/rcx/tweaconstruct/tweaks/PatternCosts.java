@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.library.materials.Material;
 
 public class PatternCosts {
-	public static void preInit() {
+	public static void init() {
 		if (ConfigHandler.toolpartCostList.length == 0)
 			return;
 
