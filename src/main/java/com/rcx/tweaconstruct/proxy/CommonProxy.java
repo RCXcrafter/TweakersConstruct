@@ -13,6 +13,7 @@ public class CommonProxy {
 		ConfigHandler.preInit(event.getSuggestedConfigurationFile());
 		ToolVincibility.preInit();
 		RemoveMaterials.preInit();
+		StatTweaks.preInit();
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -20,7 +21,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		StatNerfs.postInit();
-		StatTweaks.postInit();
+		
 	}
 }
