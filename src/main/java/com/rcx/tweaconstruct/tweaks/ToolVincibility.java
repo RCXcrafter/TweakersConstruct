@@ -7,6 +7,7 @@ import com.rcx.tweaconstruct.ConfigHandler;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -34,7 +35,7 @@ public class ToolVincibility {
 			IndestructibleEntityItem drop = (IndestructibleEntityItem) event.getEntity();
 
 			World worldObj = event.getWorld();
-			EntityItem newDrop = new EntityItem(worldObj, drop.posX, drop.posY, drop.posZ);
+			EntityItem newDrop = new EntityItem(worldObj, drop.posX, drop.posY, drop.posZ, new ItemStack(Items.STICK));
 
 			newDrop.motionX = drop.motionX;
 			newDrop.motionY = drop.motionY;
@@ -44,8 +45,8 @@ public class ToolVincibility {
 			drop.writeToNBT(tag);
 			newDrop.setPickupDelay(tag.getShort("PickupDelay"));
 
-			worldObj.spawnEntityInWorld((EntityItem) newDrop);
-			newDrop.setEntityItemStack(drop.getEntityItem());
+			worldObj.spawnEntity((EntityItem) newDrop);
+			newDrop.setItem(drop.getItem());;
 			//System.out.println(newDrop);
 
 			event.setCanceled(true);
