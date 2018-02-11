@@ -5,11 +5,11 @@
   "description": "Miscelleaneous tweaks for tinkers' construct",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/tweakers-construct",
   "updateUrl": "",
   "authorList": ["RCXcrafter"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "tweacon_logo.png",
   "screenshots": [],
   "dependencies": []
 }
