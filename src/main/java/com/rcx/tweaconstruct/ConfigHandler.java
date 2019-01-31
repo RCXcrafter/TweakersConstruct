@@ -1,10 +1,18 @@
 package com.rcx.tweaconstruct;
 
 import net.minecraftforge.common.config.Configuration;
+import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.BowMaterialStats;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
+import slimeknights.tconstruct.library.materials.HeadMaterialStats;
+import slimeknights.tconstruct.library.materials.IMaterialStats;
+import slimeknights.tconstruct.library.materials.Material;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import com.rcx.tweaconstruct.tweaks.StatTweaks;
 
@@ -20,6 +28,7 @@ public class ConfigHandler {
 	public static Integer durabilityNerf = 75;
 	public static Integer mineSpeedNerf = 75;
 	public static Boolean hardcoreNerfs = true;
+	public static Boolean fillDefaults = false;
 	public static Boolean toolVincibility = true;
 	public static String[] toolpartCostList;
 	private static String[] toolpartCostListDefaults = {
@@ -51,6 +60,9 @@ public class ConfigHandler {
 
 		hardcoreNerfs = config.getBoolean("Hardcore Nerfs", stats, hardcoreNerfs, "negative durability values are decreased further instead of increased when durabilitynerf is below 100, does the opposite for values above 100");
 
+		fillDefaults = config.getBoolean("Fill Defaults", stats, fillDefaults, "Set this to true to fill the stat tweaks list below with all the default values for all materials"
+				+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had.");
+
 		statTweaksList = config.getStringList("Stat Tweaks", stats, statTweaksListDefaults,
 				"Here you can change the stats of specific materials, this takes priority over the percentage nerfs."
 						+ "\nThe syntax is: MaterialID:HeadDurability:MiningSpeed:AttackDamage:HarvestLevel:HandleModifier:HandleDurability:ExtraDurability:DrawSpeed:Range:BonusDamage"
@@ -70,5 +82,59 @@ public class ConfigHandler {
 
 		if(config.hasChanged())
 			config.save();
+	}
+
+	public static void postInit() {
+		if (fillDefaults) {
+			List<String> defaultStats = new ArrayList<String>();
+			for (Material material : TinkerRegistry.getAllMaterials()) {
+				String materialStats = material.getIdentifier() + ":";
+
+				HeadMaterialStats headStats = null;
+				HandleMaterialStats handleStats = null;
+				ExtraMaterialStats extraStats = null;
+				BowMaterialStats bowStats = null;
+				for (IMaterialStats stat : material.getAllStats()) {
+					if (stat instanceof HeadMaterialStats)
+						headStats = (HeadMaterialStats) stat;
+					else if (stat instanceof HandleMaterialStats)
+						handleStats = (HandleMaterialStats) stat;
+					else if (stat instanceof ExtraMaterialStats)
+						extraStats = (ExtraMaterialStats) stat;
+					else if (stat instanceof BowMaterialStats)
+						bowStats = (BowMaterialStats) stat;
+				}
+				if (headStats == null)
+					materialStats += "d:d:d:d:";
+				else
+					materialStats += headStats.durability + ":" + headStats.miningspeed + ":" + headStats.attack + ":" + headStats.harvestLevel + ":";
+
+				if (handleStats == null)
+					materialStats += "d:d:";
+				else
+					materialStats += handleStats.modifier + ":" + handleStats.durability + ":";
+
+				if (extraStats == null)
+					materialStats += "d:";
+				else
+					materialStats += extraStats.extraDurability + ":";
+
+				if (bowStats == null)
+					materialStats += "d:d:d";
+				else
+					materialStats += bowStats.drawspeed + ":" + bowStats.range + ":" + bowStats.bonusDamage;
+
+				if (!materialStats.endsWith(":d:d:d:d:d:d:d:d:d:d"))
+					defaultStats.add(materialStats);
+			}
+			config.get(stats, "Stat Tweaks", statTweaksListDefaults).set(defaultStats.toArray(new String[defaultStats.size()]));
+			config.get(stats, "Fill Defaults", fillDefaults).set(false);
+			config.get(stats, "Stat Tweaks", statTweaksListDefaults).setComment("Here you can change the stats of specific materials, this takes priority over the percentage nerfs."
+					+ "\nThe syntax is: MaterialID:HeadDurability:MiningSpeed:AttackDamage:HarvestLevel:HandleModifier:HandleDurability:ExtraDurability:DrawSpeed:Range:BonusDamage"
+					+ "\nSet any value to d to keep it as the default value.");
+			config.get(stats, "Fill Defaults", fillDefaults).setComment("Set this to true to fill the stat tweaks list below with all the default values for all materials"
+					+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had.");
+			config.save();
+		}
 	}
 }
