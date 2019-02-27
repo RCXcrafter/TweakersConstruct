@@ -46,7 +46,7 @@ public class ToolVincibility {
 			newDrop.setPickupDelay(tag.getShort("PickupDelay"));
 
 			worldObj.spawnEntity((EntityItem) newDrop);
-			newDrop.setItem(drop.getItem());;
+			newDrop.setItem(drop.getItem());
 			//System.out.println(newDrop);
 
 			event.setCanceled(true);
