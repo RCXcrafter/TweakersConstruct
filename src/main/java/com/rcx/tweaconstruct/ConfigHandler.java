@@ -41,6 +41,8 @@ public class ConfigHandler {
 	// Options
 	public static Integer durabilityNerf = 75;
 	public static Integer mineSpeedNerf = 75;
+	public static Integer attackNerf = 75;
+	public static Integer armorNerf = 75;
 	public static Boolean hardcoreNerfs = true;
 	public static Boolean fillDefaults = false;
 	public static Boolean toolVincibility = true;
@@ -95,6 +97,10 @@ public class ConfigHandler {
 				+ "\nSet to 100 to disable.");
 		mineSpeedNerf = config.getInt("Miningspeed Nerf", stats, mineSpeedNerf, 0, 1000, "All mining speed values will be modified with this percentage."
 				+ "\nThese options can also be used to buff stats, but just.... don't.");
+		attackNerf = config.getInt("Attackdamage Nerf", stats, attackNerf, 0, 1000, "All attack damage values will be modified with this percentage."
+				+ "\nSet to 100 to disable.");
+		armorNerf = config.getInt("Armor Nerf", stats, armorNerf, 0, 1000, "All defense and toughness values will be modified with this percentage."
+				+ "\nSet to 100 to disable.");
 
 		hardcoreNerfs = config.getBoolean("Hardcore Nerfs", stats, hardcoreNerfs, "negative durability values are decreased further instead of increased when durabilitynerf is below 100, does the opposite for values above 100");
 

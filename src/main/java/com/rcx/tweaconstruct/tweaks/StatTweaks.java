@@ -120,10 +120,10 @@ public class StatTweaks {
 		BowStringMaterialStats stringStats = null;
 		FletchingMaterialStats fletchingStats = null;
 
-		if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.mineSpeedNerf != 100) {
+		if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.mineSpeedNerf != 100 || ConfigHandler.attackNerf != 100) {
 			if (statRegisterEvent.stats instanceof HeadMaterialStats) {
 				headStats = (HeadMaterialStats) oldStats;
-				newStats = new HeadMaterialStats(nerfDurability(headStats.durability), headStats.miningspeed*ConfigHandler.mineSpeedNerf/100, headStats.attack, headStats.harvestLevel);
+				newStats = new HeadMaterialStats(nerfDurability(headStats.durability), headStats.miningspeed*ConfigHandler.mineSpeedNerf/100, headStats.attack*ConfigHandler.attackNerf/100, headStats.harvestLevel);
 			} else if (statRegisterEvent.stats instanceof HandleMaterialStats) {
 				handleStats = (HandleMaterialStats) oldStats;
 				newStats = new HandleMaterialStats(handleStats.modifier, nerfDurability(handleStats.durability));
@@ -183,13 +183,13 @@ public class StatTweaks {
 			PlatesMaterialStats platesStats = null;
 			TrimMaterialStats trimStats = null;
 
-			if (ConfigHandler.durabilityNerf != 100) {
+			if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.armorNerf != 100) {
 				if (statRegisterEvent.stats instanceof CoreMaterialStats) {
 					coreStats = (CoreMaterialStats) oldStats;
-					newStats = new CoreMaterialStats(nerfDurability(Math.round(coreStats.durability)), coreStats.defense);
+					newStats = new CoreMaterialStats(nerfDurability(Math.round(coreStats.durability)), coreStats.defense*ConfigHandler.armorNerf/100);
 				} else if (statRegisterEvent.stats instanceof PlatesMaterialStats) {
 					platesStats = (PlatesMaterialStats) oldStats;
-					newStats = new PlatesMaterialStats(platesStats.modifier, nerfDurability(Math.round(platesStats.durability)), platesStats.toughness);
+					newStats = new PlatesMaterialStats(platesStats.modifier, nerfDurability(Math.round(platesStats.durability)), platesStats.toughness*ConfigHandler.armorNerf/100);
 				} else if (statRegisterEvent.stats instanceof TrimMaterialStats) {
 					trimStats = (TrimMaterialStats) oldStats;
 					newStats = new TrimMaterialStats(nerfDurability(Math.round(trimStats.extraDurability)));
