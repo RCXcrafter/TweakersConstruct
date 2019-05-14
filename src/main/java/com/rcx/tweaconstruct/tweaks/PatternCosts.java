@@ -7,7 +7,7 @@ import com.rcx.tweaconstruct.ConfigHandler;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.library.tools.IToolPart;
 
 public class PatternCosts {
 	public static void init() {
@@ -19,24 +19,22 @@ public class PatternCosts {
 			if (entries.length != 3)
 				continue;
 			Item partItem = Item.REGISTRY.getObject(new ResourceLocation(entries[0], entries[1]));
-			if (partItem == null || !(partItem instanceof ToolPart))
+			if (partItem == null || !(partItem instanceof IToolPart))
 				continue;
 			try {
-				Field f = ToolPart.class.getDeclaredField("cost");
-				f.setAccessible(true);
-				try {
-					f.setInt(partItem, (int) (Material.VALUE_Ingot * Double.parseDouble(entries[2])));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-					continue;
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-					continue;
+				Class clazz = partItem.getClass();
+				while (true) {
+					try {
+						clazz.getDeclaredField("cost");
+						break;
+					} catch (NoSuchFieldException e) {
+						clazz = clazz.getSuperclass();
+					}
 				}
-			} catch (NoSuchFieldException e) {
-				e.printStackTrace();
-				continue;
-			} catch (SecurityException e) {
+				Field f = clazz.getDeclaredField("cost");
+				f.setAccessible(true);
+				f.setInt(partItem, (int) (Material.VALUE_Ingot * Double.parseDouble(entries[2])));
+			} catch (Exception e) {
 				e.printStackTrace();
 				continue;
 			}
