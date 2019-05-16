@@ -123,13 +123,13 @@ public class StatTweaks {
 		if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.mineSpeedNerf != 100 || ConfigHandler.attackNerf != 100) {
 			if (statRegisterEvent.stats instanceof HeadMaterialStats) {
 				headStats = (HeadMaterialStats) oldStats;
-				newStats = new HeadMaterialStats(nerfDurability(headStats.durability), headStats.miningspeed*ConfigHandler.mineSpeedNerf/100, headStats.attack*ConfigHandler.attackNerf/100, headStats.harvestLevel);
+				newStats = new HeadMaterialStats(nerfInteger(headStats.durability, ConfigHandler.durabilityNerf), nerfFloat(headStats.miningspeed, ConfigHandler.mineSpeedNerf), nerfFloat(headStats.attack, ConfigHandler.attackNerf), headStats.harvestLevel);
 			} else if (statRegisterEvent.stats instanceof HandleMaterialStats) {
 				handleStats = (HandleMaterialStats) oldStats;
-				newStats = new HandleMaterialStats(handleStats.modifier, nerfDurability(handleStats.durability));
+				newStats = new HandleMaterialStats(handleStats.modifier, nerfInteger(handleStats.durability, ConfigHandler.durabilityNerf));
 			} else if (statRegisterEvent.stats instanceof ExtraMaterialStats) {
 				extraStats = (ExtraMaterialStats) oldStats;
-				newStats = new ExtraMaterialStats(nerfDurability(extraStats.extraDurability));
+				newStats = new ExtraMaterialStats(nerfInteger(extraStats.extraDurability, ConfigHandler.durabilityNerf));
 			}
 		}
 
@@ -186,13 +186,13 @@ public class StatTweaks {
 			if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.armorNerf != 100) {
 				if (statRegisterEvent.stats instanceof CoreMaterialStats) {
 					coreStats = (CoreMaterialStats) oldStats;
-					newStats = new CoreMaterialStats(nerfDurability(Math.round(coreStats.durability)), coreStats.defense*ConfigHandler.armorNerf/100);
+					newStats = new CoreMaterialStats(nerfInteger(Math.round(coreStats.durability), ConfigHandler.durabilityNerf), nerfFloat(coreStats.defense, ConfigHandler.armorNerf));
 				} else if (statRegisterEvent.stats instanceof PlatesMaterialStats) {
 					platesStats = (PlatesMaterialStats) oldStats;
-					newStats = new PlatesMaterialStats(platesStats.modifier, nerfDurability(Math.round(platesStats.durability)), platesStats.toughness*ConfigHandler.armorNerf/100);
+					newStats = new PlatesMaterialStats(platesStats.modifier, nerfInteger(Math.round(platesStats.durability), ConfigHandler.durabilityNerf), nerfFloat(platesStats.toughness, ConfigHandler.armorNerf));
 				} else if (statRegisterEvent.stats instanceof TrimMaterialStats) {
 					trimStats = (TrimMaterialStats) oldStats;
-					newStats = new TrimMaterialStats(nerfDurability(Math.round(trimStats.extraDurability)));
+					newStats = new TrimMaterialStats(nerfInteger(Math.round(trimStats.extraDurability), ConfigHandler.durabilityNerf));
 				}
 			}
 
@@ -219,22 +219,22 @@ public class StatTweaks {
 			FeetMaterialStats feetStats = null;
 			ShieldMaterialStats shieldStats = null;
 
-			if (ConfigHandler.durabilityNerf != 100) {
+			if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.armorNerf != 100) {
 				if (statRegisterEvent.stats instanceof HelmMaterialStats) {
 					helmStats = (HelmMaterialStats) oldStats;
-					newStats = new HelmMaterialStats(nerfDurability(helmStats.durability), helmStats.rating, helmStats.toughness, helmStats.potency);
+					newStats = new HelmMaterialStats(nerfInteger(helmStats.durability, ConfigHandler.durabilityNerf), nerfInteger(helmStats.rating, ConfigHandler.armorNerf), nerfInteger(helmStats.toughness, ConfigHandler.armorNerf), helmStats.potency);
 				} else if (statRegisterEvent.stats instanceof ChestMaterialStats) {
 					chestStats = (ChestMaterialStats) oldStats;
-					newStats = new ChestMaterialStats(nerfDurability(chestStats.durability), chestStats.rating, chestStats.toughness, chestStats.potency);
+					newStats = new ChestMaterialStats(nerfInteger(chestStats.durability, ConfigHandler.durabilityNerf), nerfInteger(chestStats.rating, ConfigHandler.armorNerf), nerfInteger(chestStats.toughness, ConfigHandler.armorNerf), chestStats.potency);
 				} else if (statRegisterEvent.stats instanceof LegsMaterialStats) {
 					legsStats = (LegsMaterialStats) oldStats;
-					newStats = new LegsMaterialStats(nerfDurability(legsStats.durability), legsStats.rating, legsStats.toughness, legsStats.potency);
+					newStats = new LegsMaterialStats(nerfInteger(legsStats.durability, ConfigHandler.durabilityNerf), nerfInteger(legsStats.rating, ConfigHandler.armorNerf), nerfInteger(legsStats.toughness, ConfigHandler.armorNerf), legsStats.potency);
 				} else if (statRegisterEvent.stats instanceof FeetMaterialStats) {
 					feetStats = (FeetMaterialStats) oldStats;
-					newStats = new FeetMaterialStats(nerfDurability(feetStats.durability), feetStats.rating, feetStats.toughness, feetStats.potency);
+					newStats = new FeetMaterialStats(nerfInteger(feetStats.durability, ConfigHandler.durabilityNerf), nerfInteger(feetStats.rating, ConfigHandler.armorNerf), nerfInteger(feetStats.toughness, ConfigHandler.armorNerf), feetStats.potency);
 				} else if (statRegisterEvent.stats instanceof ShieldMaterialStats) {
 					shieldStats = (ShieldMaterialStats) oldStats;
-					newStats = new ShieldMaterialStats(nerfDurability(shieldStats.durability), shieldStats.percentBlocked);
+					newStats = new ShieldMaterialStats(nerfInteger(shieldStats.durability, ConfigHandler.durabilityNerf), shieldStats.percentBlocked);
 				}
 			}
 
@@ -270,8 +270,12 @@ public class StatTweaks {
 			statRegisterEvent.overrideResult(newStats);
 	}
 
-	int nerfDurability(int durability) {
-		int newDurability = durability * ConfigHandler.durabilityNerf/100;
+	int nerfInteger(int durability, int percentage) {
+		return Math.round(nerfFloat(durability, percentage));
+	}
+
+	float nerfFloat(float durability, int percentage) {
+		float newDurability = durability * ConfigHandler.durabilityNerf/100;
 		if (ConfigHandler.hardcoreNerfs) {
 			if (ConfigHandler.durabilityNerf < 100) {
 				if (newDurability < 0)

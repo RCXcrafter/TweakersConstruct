@@ -112,8 +112,10 @@ public class ConfigHandler {
 				+ "\nThese options can also be used to buff stats, but just.... don't.");
 		attackNerf = config.getInt("Attackdamage Nerf", stats, attackNerf, 0, 1000, "All attack damage values will be modified with this percentage."
 				+ "\nSet to 100 to disable.");
-		armorNerf = config.getInt("Armor Nerf", stats, armorNerf, 0, 1000, "All defense and toughness values will be modified with this percentage."
-				+ "\nSet to 100 to disable.");
+		if (Loader.isModLoaded("conarm") || Loader.isModLoaded("tinkerscompendium")) {
+			armorNerf = config.getInt("Armor Nerf", stats, armorNerf, 0, 1000, "All defense and toughness values will be modified with this percentage."
+					+ "\nSet to 100 to disable.");
+		}
 
 		hardcoreNerfs = config.getBoolean("Hardcore Nerfs", stats, hardcoreNerfs, "negative durability values are decreased further instead of increased when durabilitynerf is below 100, does the opposite for values above 100");
 
