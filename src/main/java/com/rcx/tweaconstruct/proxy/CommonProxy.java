@@ -14,6 +14,7 @@ public class CommonProxy {
 		ToolVincibility.preInit();
 		RemoveMaterials.preInit();
 		StatTweaks.preInit();
+		TraitTweaks.preInit();
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -22,5 +23,6 @@ public class CommonProxy {
 
 	public void postInit(FMLPostInitializationEvent event) {
 		ConfigHandler.postInit();
+		TraitTweaks.postInit();
 	}
 }

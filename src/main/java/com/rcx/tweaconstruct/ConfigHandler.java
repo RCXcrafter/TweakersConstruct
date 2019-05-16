@@ -36,6 +36,7 @@ public class ConfigHandler {
 
 	// Categories
 	public static String stats = "Stat tweaks";
+	public static String traits = "Trait tweaks";
 	public static String misc = "Miscelleaneous";
 
 	// Options
@@ -79,6 +80,18 @@ public class ConfigHandler {
 	public static String[] shieldStatTweaksList;
 	private static String[] shieldStatTweaksListDefaults = {
 			"wood:35:25"
+	};
+	public static String[] traitTweaksList;
+	private static String[] traitTweaksListDefaults = {
+			"paper:all:tasty",
+			"paper:head:cheap",
+			"paper:handle:autosmelt",
+			"paper:extra:holy,hellish",
+			"paper:bow:coldblooded",
+			"paper:bowstring:crude",
+			"paper:projectile:dense",
+			"paper:shaft:heavy",
+			"paper:fletching:alien"
 	};
 	public static String[] RemoveMaterialList;
 	private static String[] RemoveMaterialListDefaults = {
@@ -145,6 +158,12 @@ public class ConfigHandler {
 							+ "\nThe syntax is: MaterialID:Durability:PercentBlocked"
 							+ "\nSet any value to d to keep it as the default value.");
 		}
+
+		config.setCategoryComment(traits, "Tweaks related to material traits.");
+
+		traitTweaksList = config.getStringList("Trait tweaks", traits, traitTweaksListDefaults, 
+				"Here you can change the traits of materials for certain parts or all parts."
+						+ "\nThe syntax is: MaterialID:Parts:Trait1,Trait2,etc.");
 
 		config.setCategoryComment(misc, "Some miscelleaneous but useful tweaks.");
 
