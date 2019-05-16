@@ -270,21 +270,21 @@ public class StatTweaks {
 			statRegisterEvent.overrideResult(newStats);
 	}
 
-	int nerfInteger(int durability, int percentage) {
-		return Math.round(nerfFloat(durability, percentage));
+	int nerfInteger(int value, int percentage) {
+		return Math.round(nerfFloat(value, percentage));
 	}
 
-	float nerfFloat(float durability, int percentage) {
-		float newDurability = durability * ConfigHandler.durabilityNerf/100;
+	float nerfFloat(float value, int percentage) {
+		float newValue = value * ConfigHandler.durabilityNerf/100;
 		if (ConfigHandler.hardcoreNerfs) {
 			if (ConfigHandler.durabilityNerf < 100) {
-				if (newDurability < 0)
-					newDurability += durability;
+				if (newValue < 0)
+					newValue += value;
 			} else {
-				if (newDurability < 0)
-					newDurability -= durability;
+				if (newValue < 0)
+					newValue -= value;
 			}
 		}
-		return newDurability;
+		return newValue;
 	}
 }
