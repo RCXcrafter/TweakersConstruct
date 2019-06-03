@@ -31,7 +31,7 @@ public class ToolVincibility {
 
 	@SubscribeEvent
 	public void onToolDropped(EntityJoinWorldEvent event) {
-		if (event.getEntity() instanceof IndestructibleEntityItem ) {
+		if (!event.getWorld().isRemote && event.getEntity() instanceof IndestructibleEntityItem ) {
 			IndestructibleEntityItem drop = (IndestructibleEntityItem) event.getEntity();
 
 			World worldObj = event.getWorld();
