@@ -97,6 +97,10 @@ public class ConfigHandler {
 	private static String[] RemoveMaterialListDefaults = {
 			"paper"
 	};
+	public static String[] RemoveModifierList;
+	private static String[] RemoveModifierListDefaults = {
+			"mending_moss"
+	};
 
 	public static void preInit(File file) {
 		config = new Configuration(file);
@@ -176,6 +180,8 @@ public class ConfigHandler {
 						+ "\nMaterialCost: The amount of ingots the toolpart should cost.");
 
 		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list");
+
+		RemoveModifierList = config.getStringList("Remove Modifiers", misc, RemoveModifierListDefaults, "Here you can remove any modifier by adding its id to this list");
 
 		toolVincibility = config.getBoolean("Tool Uninvincibility", misc, toolVincibility, "Turning this option on will stop tinkers tools from being invincible (they can despawn and burn in lava)");
 
