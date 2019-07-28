@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:tconstruct")
+@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:tconstruct;before:enderio")
 
 public class TweakersConstruct {
 
