@@ -169,7 +169,8 @@ public class ConfigHandler {
 
 		traitTweaksList = config.getStringList("Trait tweaks", traits, traitTweaksListDefaults, 
 				"Here you can change the traits of materials for certain parts or all parts."
-						+ "\nThe syntax is: MaterialID:Parts:Trait1,Trait2,etc.");
+						+ "\nThe syntax is: MaterialID:Parts:Trait1,Trait2,etc."
+						+ "\nTo keep all existing traits add \":false\" at the end");
 
 		config.setCategoryComment(misc, "Some miscelleaneous but useful tweaks.");
 

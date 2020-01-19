@@ -27,11 +27,12 @@ public class TraitTweaks {
 		if (ConfigHandler.traitTweaksList.length != 0)
 			for (String entry : ConfigHandler.traitTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 3)
+				if (entries.length != 3 && entries.length != 4)
 					continue;
 
 				materialsToTweak.put(entries[0] + ":" + entries[1], entries);
-				cancelledMaterials.add(entries[0]);
+				if (entries.length != 4 || Boolean.parseBoolean(entries[2]))
+					cancelledMaterials.add(entries[0]);
 			}
 	}
 
