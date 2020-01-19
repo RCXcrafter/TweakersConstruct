@@ -13,7 +13,7 @@ public class Modifiers {
 	}
 
 	@SubscribeEvent
-	public void onMaterialRegistered(ModifierRegisterEvent event) {
+	public void onModifierRegistered(ModifierRegisterEvent event) {
 		for(String modifierName : ConfigHandler.RemoveModifierList) {
 			if(event.getRecipe().getIdentifier().equals(modifierName)) {
 				event.setCanceled(true);

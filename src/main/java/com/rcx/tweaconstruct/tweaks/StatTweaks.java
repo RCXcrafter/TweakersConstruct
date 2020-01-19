@@ -276,9 +276,9 @@ public class StatTweaks {
 	}
 
 	float nerfFloat(float value, int percentage) {
-		float newValue = value * ConfigHandler.durabilityNerf/100;
+		float newValue = value * percentage/100;
 		if (ConfigHandler.hardcoreNerfs) {
-			if (ConfigHandler.durabilityNerf < 100) {
+			if (percentage < 100) {
 				if (newValue < 0)
 					newValue += value;
 			} else {
