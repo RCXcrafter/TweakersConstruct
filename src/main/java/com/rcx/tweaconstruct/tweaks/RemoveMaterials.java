@@ -29,7 +29,7 @@ public class RemoveMaterials {
 
 		for(String materialName : ConfigHandler.RemoveMaterialList) {
 			if(event.material.identifier.equals(materialName)) {
-				event.setCanceled(true);
+				event.materialIntegration.material = null;
 			}
 		}
 	}
