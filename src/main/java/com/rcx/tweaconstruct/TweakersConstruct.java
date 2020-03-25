@@ -14,8 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:tconstruct;before:enderio")
-
+@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:*")
 public class TweakersConstruct {
 
 	@SidedProxy(clientSide = "com.rcx.tweaconstruct.proxy.ClientProxy", serverSide = "com.rcx.tweaconstruct.proxy.CommonProxy")
@@ -31,10 +30,5 @@ public class TweakersConstruct {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent postEvent) {
-		proxy.postInit(postEvent);
 	}
 }
