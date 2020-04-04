@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rcx.tweaconstruct.ConfigHandler;
+import com.rcx.tweaconstruct.TweakersConstruct;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,8 +28,10 @@ public class TraitTweaks {
 		if (ConfigHandler.traitTweaksList.length != 0)
 			for (String entry : ConfigHandler.traitTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 3 && entries.length != 4)
+				if (entries.length != 3 && entries.length != 4) {
+					TweakersConstruct.logger.warn("[Trait Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				materialsToTweak.put(entries[0] + ":" + entries[1], entries);
 				if (entries.length != 4 || Boolean.parseBoolean(entries[2]))
@@ -46,23 +49,28 @@ public class TraitTweaks {
 		weAreNotDoneYet = false;
 
 		for (String key : materialsToTweak.keySet()) {
-			Material material = TinkerRegistry.getMaterial(key.split(":")[0]);
+			String[] splitKey = key.split(":");
+			Material material = TinkerRegistry.getMaterial(splitKey[0]);
 
-			if (material == null)
+			if (material == null) {
+				TweakersConstruct.logger.warn("[Trait Tweaks] Could not find material: " + splitKey[0] + ", skipping.");
 				continue;
+			}
 
 			String[] traits = materialsToTweak.get(key)[2].split(",");
 
 			for (String traitId : traits) {
 				ITrait trait = TinkerRegistry.getTrait(traitId);
 
-				if (trait == null)
+				if (trait == null) {
+					TweakersConstruct.logger.warn("[Trait Tweaks] Could not find trait: " + traitId + ", skipping.");
 					continue;
+				}
 
-				if (materialsToTweak.get(key)[1].equals("all"))
+				if (splitKey[1].equals("all"))
 					material.addTrait(trait);
 				else
-					material.addTrait(trait, materialsToTweak.get(key)[1]);
+					material.addTrait(trait, splitKey[1]);
 			}
 		}
 	}

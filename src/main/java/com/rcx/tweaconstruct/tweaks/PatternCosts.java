@@ -3,6 +3,7 @@ package com.rcx.tweaconstruct.tweaks;
 import java.lang.reflect.Field;
 
 import com.rcx.tweaconstruct.ConfigHandler;
+import com.rcx.tweaconstruct.TweakersConstruct;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -16,11 +17,15 @@ public class PatternCosts {
 
 		for (String entry : ConfigHandler.toolpartCostList) {
 			String[] entries = entry.split(":");
-			if (entries.length != 3)
+			if (entries.length != 3) {
+				TweakersConstruct.logger.warn("[Pattern Cost] Entry: " + entry + " has incorrect syntax, skipping.");
 				continue;
+			}
 			Item partItem = Item.REGISTRY.getObject(new ResourceLocation(entries[0], entries[1]));
-			if (partItem == null || !(partItem instanceof IToolPart))
+			if (partItem == null || !(partItem instanceof IToolPart)) {
+				TweakersConstruct.logger.warn("[Pattern Cost] Could not find tool part: " + entries[0] + entries[1] + ", skipping.");
 				continue;
+			}
 			try {
 				Class clazz = partItem.getClass();
 				while (true) {
@@ -35,6 +40,7 @@ public class PatternCosts {
 				f.setAccessible(true);
 				f.setInt(partItem, (int) (Material.VALUE_Ingot * Double.parseDouble(entries[2])));
 			} catch (Exception e) {
+				TweakersConstruct.logger.error("[Pattern Cost] Could not modify cost for entry: " + entry + ", skipping.");
 				e.printStackTrace();
 				continue;
 			}

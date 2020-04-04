@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rcx.tweaconstruct.ConfigHandler;
+import com.rcx.tweaconstruct.TweakersConstruct;
 
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
@@ -44,8 +45,10 @@ public class StatTweaks {
 		if (ConfigHandler.statTweaksList.length != 0)
 			for (String entry : ConfigHandler.statTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 11)
+				if (entries.length != 11) {
+					TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				materialsToTweak.put(entries[0], entries);
 			}
@@ -53,8 +56,10 @@ public class StatTweaks {
 		if (ConfigHandler.arrowShaftStatTweaksList.length != 0)
 			for (String entry : ConfigHandler.arrowShaftStatTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 3)
+				if (entries.length != 3) {
+					TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				shaftMaterialsToTweak.put(entries[0], entries);
 			}
@@ -62,8 +67,10 @@ public class StatTweaks {
 		if (ConfigHandler.bowStringStatTweaksList.length != 0)
 			for (String entry : ConfigHandler.bowStringStatTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 2)
+				if (entries.length != 2) {
+					TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				stringMaterialsToTweak.put(entries[0], entries);
 			}
@@ -71,8 +78,10 @@ public class StatTweaks {
 		if (ConfigHandler.fletchingStatTweaksList.length != 0)
 			for (String entry : ConfigHandler.fletchingStatTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 3)
+				if (entries.length != 3) {
+					TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				fletchingMaterialsToTweak.put(entries[0], entries);
 			}
@@ -80,8 +89,10 @@ public class StatTweaks {
 		if (Loader.isModLoaded("conarm") && ConfigHandler.armoryStatTweaksList.length != 0)
 			for (String entry : ConfigHandler.armoryStatTweaksList) {
 				String[] entries = entry.split(":");
-				if (entries.length != 7)
+				if (entries.length != 7) {
+					TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 					continue;
+				}
 
 				armoryMaterialsToTweak.put(entries[0], entries);
 			}
@@ -90,8 +101,10 @@ public class StatTweaks {
 			if (ConfigHandler.armorStatTweaksList.length != 0)
 				for (String entry : ConfigHandler.armorStatTweaksList) {
 					String[] entries = entry.split(":");
-					if (entries.length != 17)
+					if (entries.length != 17) {
+						TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 						continue;
+					}
 
 					armorMaterialsToTweak.put(entries[0], entries);
 				}
@@ -99,8 +112,10 @@ public class StatTweaks {
 			if (ConfigHandler.shieldStatTweaksList.length != 0)
 				for (String entry : ConfigHandler.shieldStatTweaksList) {
 					String[] entries = entry.split(":");
-					if (entries.length != 3)
+					if (entries.length != 3) {
+						TweakersConstruct.logger.warn("[Stat Tweaks] Entry: " + entry + " has incorrect syntax, skipping.");
 						continue;
+					}
 
 					shieldMaterialsToTweak.put(entries[0], entries);
 				}
