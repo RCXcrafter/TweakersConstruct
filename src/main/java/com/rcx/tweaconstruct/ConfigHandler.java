@@ -12,6 +12,7 @@ import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.IMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.traits.ITrait;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class ConfigHandler {
 	public static Integer armorNerf = 75;
 	public static Boolean hardcoreNerfs = true;
 	public static Boolean fillDefaults = false;
+	public static Boolean fillDefaultsTraits = false;
 	public static Boolean toolVincibility = true;
 	public static String[] toolpartCostList;
 	private static String[] toolpartCostListDefaults = {
@@ -124,7 +126,7 @@ public class ConfigHandler {
 		hardcoreNerfs = config.getBoolean("Hardcore Nerfs", stats, hardcoreNerfs, "negative durability values are decreased further instead of increased when durabilitynerf is below 100, does the opposite for values above 100");
 
 		fillDefaults = config.getBoolean("Fill Defaults", stats, fillDefaults, "Set this to true to fill the stat tweaks list below with all the default values for all materials"
-				+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had.");
+				+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had, so be careful.");
 
 		statTweaksList = config.getStringList("Stat Tweaks", stats, statTweaksListDefaults,
 				"Here you can change the stats of specific materials, this takes priority over the percentage nerfs."
@@ -171,6 +173,9 @@ public class ConfigHandler {
 				"Here you can change the traits of materials for certain parts or all parts."
 						+ "\nThe syntax is: MaterialID:Parts:Trait1,Trait2,etc."
 						+ "\nTo keep all existing traits add \":false\" at the end");
+
+		fillDefaultsTraits = config.getBoolean("Fill Defaults Traits", traits, fillDefaultsTraits, "Set this to true to fill the trait tweaks list below with all the default values for all materials"
+				+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had, so be careful.");
 
 		config.setCategoryComment(misc, "Some miscelleaneous but useful tweaks.");
 
@@ -396,8 +401,37 @@ public class ConfigHandler {
 						+ "\nSet any value to d to keep it as the default value.");
 			}
 			config.get(stats, "Fill Defaults", fillDefaults).setComment("Set this to true to fill the stat tweaks list below with all the default values for all materials"
-					+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had.");
-			config.save();
+					+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had, so be careful.");
 		}
+
+		if (fillDefaultsTraits) {
+			List<String> defaultTraits = new ArrayList<String>();
+			for (Material material : TinkerRegistry.getAllMaterials()) {
+				String materialTraits = material.getIdentifier() + ":";
+				for (IMaterialStats stat : material.getAllStats()) {
+					String materialPart = materialTraits + stat.getIdentifier() + ":";
+					for (ITrait trait : material.getAllTraitsForStats(stat.getIdentifier())) {
+						materialPart += trait.getIdentifier() + ",";
+					}
+					if (material.getAllTraitsForStats(stat.getIdentifier()).size() != 0) {
+						materialPart = materialPart.substring(0, materialPart.length() - 1);
+						defaultTraits.add(materialPart);
+					}
+				}
+			}
+
+			config.get(traits, "Fill Defaults Traits", fillDefaultsTraits).set(false);
+			config.get(traits, "Trait tweaks", traitTweaksListDefaults).set(defaultTraits.toArray(new String[defaultTraits.size()]));
+
+			config.get(traits, "Trait tweaks", traitTweaksListDefaults).setComment(
+					"Here you can change the traits of materials for certain parts or all parts."
+							+ "\nThe syntax is: MaterialID:Parts:Trait1,Trait2,etc."
+							+ "\nTo keep all existing traits add \":false\" at the end");
+			config.get(traits, "Fill Defaults Traits", fillDefaultsTraits).setComment("Set this to true to fill the trait tweaks list below with all the default values for all materials"
+					+ "\nThis option disables itself after filling the list and it will also delete any tweaks you already had, so be careful.");
+		}
+
+		if (fillDefaults || fillDefaultsTraits)
+			config.save();
 	}
 }
