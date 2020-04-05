@@ -52,7 +52,7 @@ public class TraitTweaks {
 			String[] splitKey = key.split(":");
 			Material material = TinkerRegistry.getMaterial(splitKey[0]);
 
-			if (material == null) {
+			if (material.equals(Material.UNKNOWN)) {
 				TweakersConstruct.logger.warn("[Trait Tweaks] Could not find material: " + splitKey[0] + ", skipping.");
 				continue;
 			}
