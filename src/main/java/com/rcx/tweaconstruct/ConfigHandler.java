@@ -99,6 +99,10 @@ public class ConfigHandler {
 	private static String[] RemoveMaterialListDefaults = {
 			"paper"
 	};
+	public static String[] RemoveStatList;
+	private static String[] RemoveStatListDefaults = {
+			"stone:handle"
+	};
 	public static String[] RemoveModifierList;
 	private static String[] RemoveModifierListDefaults = {
 			"mending_moss"
@@ -186,6 +190,10 @@ public class ConfigHandler {
 						+ "\nMaterialCost: The amount of ingots the toolpart should cost.");
 
 		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list");
+
+		//RemoveStatList = config.getStringList("Remove Stats", misc, RemoveStatListDefaults,
+		//		"Here you can remove certain stats from materials to prevent certain parts from being made out of it."
+		//				+ "\nThe syntax is: Material:Stat");
 
 		RemoveModifierList = config.getStringList("Remove Modifiers", misc, RemoveModifierListDefaults, "Here you can remove any modifier by adding its id to this list");
 

@@ -137,13 +137,13 @@ public class StatTweaks {
 		FletchingMaterialStats fletchingStats = null;
 
 		if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.mineSpeedNerf != 100 || ConfigHandler.attackNerf != 100) {
-			if (statRegisterEvent.stats instanceof HeadMaterialStats) {
+			if (oldStats instanceof HeadMaterialStats) {
 				headStats = (HeadMaterialStats) oldStats;
 				newStats = new HeadMaterialStats(nerfInteger(headStats.durability, ConfigHandler.durabilityNerf), nerfFloat(headStats.miningspeed, ConfigHandler.mineSpeedNerf), nerfFloat(headStats.attack, ConfigHandler.attackNerf), headStats.harvestLevel);
-			} else if (statRegisterEvent.stats instanceof HandleMaterialStats) {
+			} else if (oldStats instanceof HandleMaterialStats) {
 				handleStats = (HandleMaterialStats) oldStats;
 				newStats = new HandleMaterialStats(handleStats.modifier, nerfInteger(handleStats.durability, ConfigHandler.durabilityNerf));
-			} else if (statRegisterEvent.stats instanceof ExtraMaterialStats) {
+			} else if (oldStats instanceof ExtraMaterialStats) {
 				extraStats = (ExtraMaterialStats) oldStats;
 				newStats = new ExtraMaterialStats(nerfInteger(extraStats.extraDurability, ConfigHandler.durabilityNerf));
 			}
@@ -152,16 +152,16 @@ public class StatTweaks {
 		if (materialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 			String[] entries = materialsToTweak.get(statRegisterEvent.material.identifier);
 
-			if (statRegisterEvent.stats instanceof HeadMaterialStats) {
+			if (oldStats instanceof HeadMaterialStats) {
 				headStats = (HeadMaterialStats) (headStats == null ? oldStats:newStats);
 				newStats = new HeadMaterialStats(entries[1].equals("d") ? headStats.durability:Integer.parseInt(entries[1]), entries[2].equals("d") ? headStats.miningspeed:Float.parseFloat(entries[2]), entries[3].equals("d") ? headStats.attack:Float.parseFloat(entries[3]), entries[4].equals("d") ? headStats.harvestLevel:Integer.parseInt(entries[4]));
-			} else if (statRegisterEvent.stats instanceof HandleMaterialStats) {
+			} else if (oldStats instanceof HandleMaterialStats) {
 				handleStats = (HandleMaterialStats) (handleStats == null ? oldStats:newStats);
 				newStats = new HandleMaterialStats(entries[5].equals("d") ? handleStats.modifier:Float.parseFloat(entries[5]), entries[6].equals("d") ? handleStats.durability:Integer.parseInt(entries[6]));
-			} else if (statRegisterEvent.stats instanceof ExtraMaterialStats) {
+			} else if (oldStats instanceof ExtraMaterialStats) {
 				extraStats = (ExtraMaterialStats) (extraStats == null ? oldStats:newStats);
 				newStats = new ExtraMaterialStats(entries[7].equals("d") ? extraStats.extraDurability:Integer.parseInt(entries[7]));
-			} else if (statRegisterEvent.stats instanceof BowMaterialStats) {
+			} else if (oldStats instanceof BowMaterialStats) {
 				bowStats = (BowMaterialStats) oldStats;
 				newStats = new BowMaterialStats(entries[8].equals("d") ? bowStats.drawspeed:Float.parseFloat(entries[8]), entries[9].equals("d") ? bowStats.range:Float.parseFloat(entries[9]), entries[10].equals("d") ? bowStats.bonusDamage:Float.parseFloat(entries[10]));
 			}
@@ -170,7 +170,7 @@ public class StatTweaks {
 		if (shaftMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 			String[] entries = shaftMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-			if (statRegisterEvent.stats instanceof ArrowShaftMaterialStats) {
+			if (oldStats instanceof ArrowShaftMaterialStats) {
 				shaftStats = (ArrowShaftMaterialStats) (shaftStats == null ? oldStats:newStats);
 				newStats = new ArrowShaftMaterialStats(entries[1].equals("d") ? shaftStats.modifier:Float.parseFloat(entries[1]), entries[2].equals("d") ? shaftStats.bonusAmmo:Integer.parseInt(entries[2]));
 			}
@@ -179,7 +179,7 @@ public class StatTweaks {
 		if (stringMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 			String[] entries = stringMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-			if (statRegisterEvent.stats instanceof BowStringMaterialStats) {
+			if (oldStats instanceof BowStringMaterialStats) {
 				stringStats = (BowStringMaterialStats) (stringStats == null ? oldStats:newStats);
 				newStats = new BowStringMaterialStats(entries[1].equals("d") ? stringStats.modifier:Float.parseFloat(entries[1]));
 			}
@@ -188,7 +188,7 @@ public class StatTweaks {
 		if (fletchingMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 			String[] entries = fletchingMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-			if (statRegisterEvent.stats instanceof FletchingMaterialStats) {
+			if (oldStats instanceof FletchingMaterialStats) {
 				fletchingStats = (FletchingMaterialStats) (fletchingStats == null ? oldStats:newStats);
 				newStats = new FletchingMaterialStats(entries[1].equals("d") ? fletchingStats.accuracy:Float.parseFloat(entries[1]), entries[2].equals("d") ? fletchingStats.modifier:Float.parseFloat(entries[2]));
 			}
@@ -200,13 +200,13 @@ public class StatTweaks {
 			TrimMaterialStats trimStats = null;
 
 			if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.armorNerf != 100) {
-				if (statRegisterEvent.stats instanceof CoreMaterialStats) {
+				if (oldStats instanceof CoreMaterialStats) {
 					coreStats = (CoreMaterialStats) oldStats;
 					newStats = new CoreMaterialStats(nerfInteger(Math.round(coreStats.durability), ConfigHandler.durabilityNerf), nerfFloat(coreStats.defense, ConfigHandler.armorNerf));
-				} else if (statRegisterEvent.stats instanceof PlatesMaterialStats) {
+				} else if (oldStats instanceof PlatesMaterialStats) {
 					platesStats = (PlatesMaterialStats) oldStats;
 					newStats = new PlatesMaterialStats(platesStats.modifier, nerfInteger(Math.round(platesStats.durability), ConfigHandler.durabilityNerf), nerfFloat(platesStats.toughness, ConfigHandler.armorNerf));
-				} else if (statRegisterEvent.stats instanceof TrimMaterialStats) {
+				} else if (oldStats instanceof TrimMaterialStats) {
 					trimStats = (TrimMaterialStats) oldStats;
 					newStats = new TrimMaterialStats(nerfInteger(Math.round(trimStats.extraDurability), ConfigHandler.durabilityNerf));
 				}
@@ -215,13 +215,13 @@ public class StatTweaks {
 			if (armoryMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 				String[] entries = armoryMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-				if (statRegisterEvent.stats instanceof CoreMaterialStats) {
+				if (oldStats instanceof CoreMaterialStats) {
 					coreStats = (CoreMaterialStats) (coreStats == null ? oldStats:newStats);
 					newStats = new CoreMaterialStats(entries[1].equals("d") ? coreStats.durability:Float.parseFloat(entries[1]), entries[2].equals("d") ? coreStats.defense:Float.parseFloat(entries[2]));
-				} else if (statRegisterEvent.stats instanceof PlatesMaterialStats) {
+				} else if (oldStats instanceof PlatesMaterialStats) {
 					platesStats = (PlatesMaterialStats) (platesStats == null ? oldStats:newStats);
 					newStats = new PlatesMaterialStats(entries[3].equals("d") ? platesStats.modifier:Float.parseFloat(entries[3]), entries[4].equals("d") ? platesStats.durability:Float.parseFloat(entries[4]), entries[5].equals("d") ? platesStats.toughness:Float.parseFloat(entries[5]));
-				} else if (statRegisterEvent.stats instanceof TrimMaterialStats) {
+				} else if (oldStats instanceof TrimMaterialStats) {
 					trimStats = (TrimMaterialStats) (trimStats == null ? oldStats:newStats);
 					newStats = new TrimMaterialStats(entries[6].equals("d") ? trimStats.extraDurability:Float.parseFloat(entries[6]));
 				}
@@ -236,19 +236,19 @@ public class StatTweaks {
 			ShieldMaterialStats shieldStats = null;
 
 			if (ConfigHandler.durabilityNerf != 100 || ConfigHandler.armorNerf != 100) {
-				if (statRegisterEvent.stats instanceof HelmMaterialStats) {
+				if (oldStats instanceof HelmMaterialStats) {
 					helmStats = (HelmMaterialStats) oldStats;
 					newStats = new HelmMaterialStats(nerfInteger(helmStats.durability, ConfigHandler.durabilityNerf), nerfInteger(helmStats.rating, ConfigHandler.armorNerf), nerfInteger(helmStats.toughness, ConfigHandler.armorNerf), helmStats.potency);
-				} else if (statRegisterEvent.stats instanceof ChestMaterialStats) {
+				} else if (oldStats instanceof ChestMaterialStats) {
 					chestStats = (ChestMaterialStats) oldStats;
 					newStats = new ChestMaterialStats(nerfInteger(chestStats.durability, ConfigHandler.durabilityNerf), nerfInteger(chestStats.rating, ConfigHandler.armorNerf), nerfInteger(chestStats.toughness, ConfigHandler.armorNerf), chestStats.potency);
-				} else if (statRegisterEvent.stats instanceof LegsMaterialStats) {
+				} else if (oldStats instanceof LegsMaterialStats) {
 					legsStats = (LegsMaterialStats) oldStats;
 					newStats = new LegsMaterialStats(nerfInteger(legsStats.durability, ConfigHandler.durabilityNerf), nerfInteger(legsStats.rating, ConfigHandler.armorNerf), nerfInteger(legsStats.toughness, ConfigHandler.armorNerf), legsStats.potency);
-				} else if (statRegisterEvent.stats instanceof FeetMaterialStats) {
+				} else if (oldStats instanceof FeetMaterialStats) {
 					feetStats = (FeetMaterialStats) oldStats;
 					newStats = new FeetMaterialStats(nerfInteger(feetStats.durability, ConfigHandler.durabilityNerf), nerfInteger(feetStats.rating, ConfigHandler.armorNerf), nerfInteger(feetStats.toughness, ConfigHandler.armorNerf), feetStats.potency);
-				} else if (statRegisterEvent.stats instanceof ShieldMaterialStats) {
+				} else if (oldStats instanceof ShieldMaterialStats) {
 					shieldStats = (ShieldMaterialStats) oldStats;
 					newStats = new ShieldMaterialStats(nerfInteger(shieldStats.durability, ConfigHandler.durabilityNerf), shieldStats.percentBlocked);
 				}
@@ -257,16 +257,16 @@ public class StatTweaks {
 			if (armorMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 				String[] entries = armorMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-				if (statRegisterEvent.stats instanceof HelmMaterialStats) {
+				if (oldStats instanceof HelmMaterialStats) {
 					helmStats = (HelmMaterialStats) (helmStats == null ? oldStats:newStats);
 					newStats = new HelmMaterialStats(entries[1].equals("d") ? helmStats.durability:Integer.parseInt(entries[1]), entries[2].equals("d") ? helmStats.rating:Integer.parseInt(entries[2]), entries[3].equals("d") ? helmStats.toughness:Integer.parseInt(entries[3]), entries[4].equals("d") ? helmStats.potency:Float.parseFloat(entries[4]));
-				} else if (statRegisterEvent.stats instanceof ChestMaterialStats) {
+				} else if (oldStats instanceof ChestMaterialStats) {
 					chestStats = (ChestMaterialStats) (chestStats == null ? oldStats:newStats);
 					newStats = new ChestMaterialStats(entries[5].equals("d") ? chestStats.durability:Integer.parseInt(entries[5]), entries[6].equals("d") ? chestStats.rating:Integer.parseInt(entries[6]), entries[7].equals("d") ? chestStats.toughness:Integer.parseInt(entries[7]), entries[8].equals("d") ? chestStats.potency:Float.parseFloat(entries[8]));
-				} else if (statRegisterEvent.stats instanceof LegsMaterialStats) {
+				} else if (oldStats instanceof LegsMaterialStats) {
 					legsStats = (LegsMaterialStats) (legsStats == null ? oldStats:newStats);
 					newStats = new LegsMaterialStats(entries[9].equals("d") ? legsStats.durability:Integer.parseInt(entries[9]), entries[10].equals("d") ? legsStats.rating:Integer.parseInt(entries[10]), entries[11].equals("d") ? legsStats.toughness:Integer.parseInt(entries[11]), entries[12].equals("d") ? legsStats.potency:Float.parseFloat(entries[12]));
-				} else if (statRegisterEvent.stats instanceof FeetMaterialStats) {
+				} else if (oldStats instanceof FeetMaterialStats) {
 					feetStats = (FeetMaterialStats) (feetStats == null ? oldStats:newStats);
 					newStats = new FeetMaterialStats(entries[13].equals("d") ? feetStats.durability:Integer.parseInt(entries[13]), entries[14].equals("d") ? feetStats.rating:Integer.parseInt(entries[14]), entries[15].equals("d") ? feetStats.toughness:Integer.parseInt(entries[15]), entries[16].equals("d") ? feetStats.potency:Float.parseFloat(entries[16]));
 				}
@@ -275,7 +275,7 @@ public class StatTweaks {
 			if (shieldMaterialsToTweak.containsKey(statRegisterEvent.material.identifier)) {
 				String[] entries = shieldMaterialsToTweak.get(statRegisterEvent.material.identifier);
 
-				if (statRegisterEvent.stats instanceof ShieldMaterialStats) {
+				if (oldStats instanceof ShieldMaterialStats) {
 					shieldStats = (ShieldMaterialStats) (shieldStats == null ? oldStats:newStats);
 					newStats = new ShieldMaterialStats(entries[1].equals("d") ? shieldStats.durability:Integer.parseInt(entries[1]), entries[2].equals("d") ? shieldStats.percentBlocked:Integer.parseInt(entries[2]));
 				}

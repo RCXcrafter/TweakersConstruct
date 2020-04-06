@@ -13,6 +13,7 @@ public class CommonProxy {
 		ConfigHandler.preInit(event.getSuggestedConfigurationFile());
 		ToolVincibility.preInit();
 		RemoveMaterials.preInit();
+		//RemoveStats.preInit();
 		StatTweaks.preInit();
 		TraitTweaks.preInit();
 		Modifiers.preInit();
