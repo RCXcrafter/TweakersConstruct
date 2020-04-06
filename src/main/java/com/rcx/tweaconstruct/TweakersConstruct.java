@@ -16,13 +16,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "before:*")
+@Mod(modid = TweakersConstruct.MODID, version = TweakersConstruct.VERSION, dependencies = "required-before:tconstruct;before:*")
 public class TweakersConstruct {
 
 	@SidedProxy(clientSide = "com.rcx.tweaconstruct.proxy.ClientProxy", serverSide = "com.rcx.tweaconstruct.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	public static final String MODID = "tweakersconstruct";
-	public static final String VERSION = "1.12.2-1.5.1";
+	public static final String VERSION = "1.12.2-1.5.3";
 
     public static Logger logger;
 
