@@ -189,7 +189,8 @@ public class ConfigHandler {
 						+ "\nItemID: The id of the toolpart."
 						+ "\nMaterialCost: The amount of ingots the toolpart should cost.");
 
-		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list");
+		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list."
+				+ "\nYou can add :ModID at the end to only remove the material if it's added by a certain mod.");
 
 		//RemoveStatList = config.getStringList("Remove Stats", misc, RemoveStatListDefaults,
 		//		"Here you can remove certain stats from materials to prevent certain parts from being made out of it."
