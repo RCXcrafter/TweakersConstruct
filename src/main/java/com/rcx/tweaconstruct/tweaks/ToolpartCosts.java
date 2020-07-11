@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.IToolPart;
 
-public class PatternCosts {
+public class ToolpartCosts {
 	public static void init() {
 		if (ConfigHandler.toolpartCostList.length == 0)
 			return;
@@ -18,12 +18,12 @@ public class PatternCosts {
 		for (String entry : ConfigHandler.toolpartCostList) {
 			String[] entries = entry.split(":");
 			if (entries.length != 3) {
-				TweakersConstruct.logger.warn("[Pattern Cost] Entry: " + entry + " has incorrect syntax, skipping.");
+				TweakersConstruct.logger.warn("[Toolpart Cost] Entry: " + entry + " has incorrect syntax, skipping.");
 				continue;
 			}
 			Item partItem = Item.REGISTRY.getObject(new ResourceLocation(entries[0], entries[1]));
 			if (partItem == null || !(partItem instanceof IToolPart)) {
-				TweakersConstruct.logger.warn("[Pattern Cost] Could not find tool part: " + entries[0] + entries[1] + ", skipping.");
+				TweakersConstruct.logger.warn("[Toolpart Cost] Could not find tool part: " + entries[0] + entries[1] + ", skipping.");
 				continue;
 			}
 			try {
@@ -40,7 +40,7 @@ public class PatternCosts {
 				f.setAccessible(true);
 				f.setInt(partItem, (int) (Material.VALUE_Ingot * Double.parseDouble(entries[2])));
 			} catch (Exception e) {
-				TweakersConstruct.logger.error("[Pattern Cost] Could not modify cost for entry: " + entry + ", skipping.");
+				TweakersConstruct.logger.error("[Toolpart Cost] Could not modify cost for entry: " + entry + ", skipping.");
 				e.printStackTrace();
 				continue;
 			}
