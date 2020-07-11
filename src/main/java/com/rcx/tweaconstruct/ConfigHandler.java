@@ -99,6 +99,10 @@ public class ConfigHandler {
 	private static String[] RemoveMaterialListDefaults = {
 			"paper"
 	};
+	public static String[] MateriaAdditionsList;
+	private static String[] MateriaAdditionsListDefaults = {
+			"stone:1:144:minecraft:bedrock:0"
+	};
 	public static String[] RemoveStatList;
 	private static String[] RemoveStatListDefaults = {
 			"stone:handle"
@@ -191,6 +195,15 @@ public class ConfigHandler {
 
 		RemoveMaterialList = config.getStringList("Remove Materials", misc, RemoveMaterialListDefaults, "Here you can remove any material by adding its id to this list."
 				+ "\nYou can add :ModID at the end to only remove the material if it's added by a certain mod.");
+
+		MateriaAdditionsList = config.getStringList("Material Additions", misc, MateriaAdditionsListDefaults, "Here you can add items to a material to allow the material to be made of that item."
+				+ "\nThe syntax is: MaterialID:AmountNeeded:AmountMatched:ModID:ItemID:Metadata"
+				+ "\nMaterialID: The id of the material."
+				+ "\nAmountNeeded: The amount of items needed to make the matched amount."
+				+ "\nAmountMatched: The amount of material this item is worth, 1 ingot is worth 144."
+				+ "\nModID: The mod id of the item."
+				+ "\nItemID: The id of the item."
+				+ "\nMetadata: The metadata of the item (optional).");
 
 		//RemoveStatList = config.getStringList("Remove Stats", misc, RemoveStatListDefaults,
 		//		"Here you can remove certain stats from materials to prevent certain parts from being made out of it."
