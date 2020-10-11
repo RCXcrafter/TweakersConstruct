@@ -43,6 +43,7 @@ public class TraitTweaks {
 	public void onTraitRegister(MaterialEvent.TraitRegisterEvent<ITrait> traitRegisterEvent) {
 		if (weAreNotDoneYet && cancelledMaterials.contains(traitRegisterEvent.material.identifier))
 			traitRegisterEvent.setCanceled(true);
+		TinkerRegistry.addTrait(traitRegisterEvent.trait);
 	}
 
 	public static void postInit() {
