@@ -8,6 +8,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 public class TweakersConstructPostload {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent postEvent) {
-		TweakersConstruct.proxy.postInit(postEvent);
+		TweakersConstruct.proxy.latePostInit(postEvent);
 	}
 }

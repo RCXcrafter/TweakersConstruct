@@ -36,4 +36,9 @@ public class TweakersConstruct {
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		proxy.earlyPostInit(event);
+	}
 }
