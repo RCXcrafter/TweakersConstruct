@@ -22,10 +22,10 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		ToolpartCosts.init();
 		MaterialAdditions.init();
+		TraitTweaks.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
 		ConfigHandler.postInit();
-		TraitTweaks.postInit();
 	}
 }

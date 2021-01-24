@@ -46,7 +46,7 @@ public class TraitTweaks {
 		TinkerRegistry.addTrait(traitRegisterEvent.trait);
 	}
 
-	public static void postInit() {
+	public static void init() {
 		weAreNotDoneYet = false;
 
 		for (String key : materialsToTweak.keySet()) {
