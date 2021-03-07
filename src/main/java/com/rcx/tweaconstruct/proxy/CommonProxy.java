@@ -17,6 +17,7 @@ public class CommonProxy {
 		StatTweaks.preInit();
 		TraitTweaks.preInit();
 		Modifiers.preInit();
+		PartCreationTweaks.preInit();
 	}
 
 	public void init(FMLInitializationEvent event) {

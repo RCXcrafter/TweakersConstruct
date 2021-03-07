@@ -111,6 +111,10 @@ public class ConfigHandler {
 	private static String[] RemoveModifierListDefaults = {
 			"mending_moss"
 	};
+	public static String[] PartCreationList;
+	private static String[] PartCreationListDefaults = {
+			"iron:true:true"
+	};
 
 	public static void preInit(File file) {
 		config = new Configuration(file);
@@ -209,9 +213,15 @@ public class ConfigHandler {
 		//		"Here you can remove certain stats from materials to prevent certain parts from being made out of it."
 		//				+ "\nThe syntax is: Material:Stat");
 
-		RemoveModifierList = config.getStringList("Remove Modifiers", misc, RemoveModifierListDefaults, "Here you can remove any modifier by adding its id to this list");
+		RemoveModifierList = config.getStringList("Remove Modifiers", misc, RemoveModifierListDefaults, "Here you can remove any modifier by adding its id to this list.");
 
-		toolVincibility = config.getBoolean("Tool Uninvincibility", misc, toolVincibility, "Turning this option on will stop tinkers tools from being invincible (they can despawn and burn in lava)");
+		PartCreationList = config.getStringList("Part Creation", misc, PartCreationListDefaults, "Here you can modify how toolparts can be created."
+				+ "\nThe syntax is: MaterialID:Craftable:Castable"
+				+ "\nMaterialID: The id of the material."
+				+ "\nCraftable: Whether toolparts can be created on the part builder."
+				+ "\nCastable: Whether toolparts can be created on the casting table.");
+
+		toolVincibility = config.getBoolean("Tool Uninvincibility", misc, toolVincibility, "Turning this option on will stop tinkers tools from being invincible (they can despawn and burn in lava).");
 
 		if(config.hasChanged())
 			config.save();
