@@ -26,8 +26,8 @@ public class CommonProxy {
 	}
 
 	public void earlyPostInit(FMLPostInitializationEvent event) {
-		
 		TraitTweaks.init();
+		PartCreationTweaks.postInit();
 	}
 
 	public void latePostInit(FMLPostInitializationEvent event) {
